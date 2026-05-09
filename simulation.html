@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulation — ASTRA Mission</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo"><span class="logo-icon">◈</span><span>ASTRA</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="simulation.html" class="active">Simulation</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="team.html">Team</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="page-hero">
+  <canvas id="starfield"></canvas>
+  <div class="page-hero-content">
+    <span class="section-tag">SIMULATION & TESTING</span>
+    <h1>Mission <em>Simulation</em></h1>
+    <p>Watch our system in action — from debris detection through capture and deorbit.</p>
+  </div>
+</section>
+
+<!-- VIDEO GALLERY -->
+<section class="sim-section">
+  <div class="section-header">
+    <span class="section-tag">VIDEO SIMULATIONS</span>
+    <h2>Full Mission Videos</h2>
+  </div>
+
+  <div class="video-grid">
+
+    <div class="video-block featured">
+      <div class="video-label">Net System — Full Simulation</div>
+      <!-- REPLACE src with your video path -->
+      <video controls poster="images/thumb-net.jpg">
+        <source src="videos/net-simulation.mp4" type="video/mp4"/>
+        Video not found. Place file at: videos/net-simulation.mp4
+      </video>
+      <p class="video-desc">Complete walkthrough of the tether net deployment sequence targeting small debris objects in low Earth orbit.</p>
+    </div>
+
+    <div class="video-block featured">
+      <div class="video-label">Robotic Arm — Full Simulation</div>
+      <video controls poster="images/thumb-arm.jpg">
+        <source src="videos/arm-simulation.mp4" type="video/mp4"/>
+        Video not found. Place file at: videos/arm-simulation.mp4
+      </video>
+      <p class="video-desc">The electromagnetic robotic arm engaging and redirecting a large debris fragment on a controlled deorbit trajectory.</p>
+    </div>
+
+    <div class="video-block">
+      <div class="video-label">AI Camera Detection</div>
+      <video controls poster="images/thumb-ai.jpg">
+        <source src="videos/ai-detection.mp4" type="video/mp4"/>
+        Video not found. Place file at: videos/ai-detection.mp4
+      </video>
+      <p class="video-desc">Real-time AI object detection and classification system demo.</p>
+    </div>
+
+    <div class="video-block">
+      <div class="video-label">Deorbit & Atmospheric Burnup</div>
+      <video controls poster="images/thumb-deorbit.jpg">
+        <source src="videos/deorbit.mp4" type="video/mp4"/>
+        Video not found. Place file at: videos/deorbit.mp4
+      </video>
+      <p class="video-desc">Final phase simulation showing debris reentry and burnup in Earth's atmosphere.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SIMULATION PHASES -->
+<section class="phases-section">
+  <div class="section-header">
+    <span class="section-tag">MISSION PHASES</span>
+    <h2>Simulation Breakdown</h2>
+  </div>
+  <div class="phases-timeline">
+    <div class="phase">
+      <div class="phase-num">T-00</div>
+      <div class="phase-dot"></div>
+      <div class="phase-info">
+        <h4>Approach & Scan</h4>
+        <p>Satellite maneuvers to intercept zone. AI camera activates and begins orbital debris survey.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">T-01</div>
+      <div class="phase-dot"></div>
+      <div class="phase-info">
+        <h4>Target Lock</h4>
+        <p>AI identifies and classifies target debris. System selects net or arm based on size analysis.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">T-02</div>
+      <div class="phase-dot"></div>
+      <div class="phase-info">
+        <h4>Capture</h4>
+        <p>Selected system deploys. Net or electromagnetic arm secures the debris object.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">T-03</div>
+      <div class="phase-dot"></div>
+      <div class="phase-info">
+        <h4>Deorbit Burn</h4>
+        <p>Onboard thrusters execute deorbit maneuver, reducing orbital velocity to initiate reentry.</p>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-num">T-04</div>
+      <div class="phase-dot"></div>
+      <div class="phase-info">
+        <h4>Atmospheric Reentry</h4>
+        <p>Debris enters Earth's atmosphere and disintegrates completely due to aerodynamic heating.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">◈ ASTRA</div>
+  <p>Space Debris Catcher — Orbital Cleanup Mission</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="technology.html">Technology</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="team.html">Team</a>
+  </div>
+  <div class="footer-copy">© 2026 ASTRA Team. All Rights Reserved.</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

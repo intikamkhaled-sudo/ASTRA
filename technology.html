@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology — ASTRA Mission</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo"><span class="logo-icon">◈</span><span>ASTRA</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="technology.html" class="active">Technology</a></li>
+    <li><a href="simulation.html">Simulation</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="team.html">Team</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <canvas id="starfield"></canvas>
+  <div class="page-hero-content">
+    <span class="section-tag">SYSTEMS & TECHNOLOGY</span>
+    <h1>Our <em>Capture</em> Systems</h1>
+    <p>Two complementary technologies designed to handle debris of any size in low Earth orbit.</p>
+  </div>
+</section>
+
+<!-- NET SYSTEM -->
+<section class="tech-section" id="net">
+  <div class="tech-block">
+    <div class="tech-text">
+      <div class="tech-label">SYSTEM 01 — SMALL DEBRIS</div>
+      <h2>Tether Net<br/><em>System</em></h2>
+      <p>
+        The tether net is a compact, foldable mesh deployed at high velocity toward small debris objects.
+        Guided by the satellite's onboard AI camera, the net adjusts its trajectory autonomously
+        to intercept the target debris with precision.
+      </p>
+      <p>
+        Once the debris is enclosed, the net contracts and tethers the object to the satellite.
+        A controlled deorbit maneuver then redirects both satellite and debris into a descending
+        trajectory, where the captured material burns up completely on atmospheric reentry.
+      </p>
+      <div class="tech-specs">
+        <div class="spec"><span class="spec-label">Target Size</span><span class="spec-val">1m – 30m</span></div>
+        <div class="spec"><span class="spec-label">Guidance</span><span class="spec-val">AI Camera + Computer Vision</span></div>
+        <div class="spec"><span class="spec-label">Disposal</span><span class="spec-val">Atmospheric Burnup</span></div>
+      </div>
+    </div>
+    <div class="tech-media">
+      <!-- REPLACE WITH YOUR IMAGE: src="images/net-system.jpg" -->
+      <div class="media-placeholder">
+        <div class="placeholder-icon">⬡</div>
+        <p>Net System Image</p>
+        <small>Replace with: images/net-system.jpg</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARM SYSTEM -->
+<section class="tech-section alt-bg" id="arm">
+  <div class="tech-block reverse">
+    <div class="tech-text">
+      <div class="tech-label">SYSTEM 02 — LARGE DEBRIS</div>
+      <h2>Robotic Arm +<br/><em>Electromagnet</em></h2>
+      <p>
+        When debris exceeds a critical size threshold, the AI routes control to the robotic arm system.
+        The arm extends from the satellite body and activates a powerful electromagnetic head
+        that attracts metallic debris — drawing it in for a secure mechanical grip.
+      </p>
+      <p>
+        With the debris locked in place, the arm repositions the object into an Earth-crossing trajectory.
+        Released at the right vector, the debris enters the atmosphere and disintegrates safely,
+        eliminating the orbital threat completely.
+      </p>
+      <div class="tech-specs">
+        <div class="spec"><span class="spec-label">Target Size</span><span class="spec-val">50cm+</span></div>
+        <div class="spec"><span class="spec-label">Mechanism</span><span class="spec-val">Robotic Arm + Electromagnet</span></div>
+        <div class="spec"><span class="spec-label">Disposal</span><span class="spec-val">Directed Atmospheric Reentry</span></div>
+      </div>
+    </div>
+    <div class="tech-media">
+      <!-- REPLACE WITH YOUR IMAGE: src="images/arm-system.jpg" -->
+      <div class="media-placeholder">
+        <div class="placeholder-icon">⟁</div>
+        <p>Robotic Arm Image</p>
+        <small>Replace with: images/arm-system.jpg</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI CAMERA SECTION -->
+<section class="tech-section">
+  <div class="section-header">
+    <span class="section-tag">INTELLIGENCE LAYER</span>
+    <h2>AI Camera System</h2>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-icon">◉</div>
+      <h4>Real-Time Detection</h4>
+      <p>The onboard camera continuously scans the surrounding orbital space, identifying debris objects using trained computer vision models.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">⊞</div>
+      <h4>Size Classification</h4>
+      <p>AI algorithms estimate debris dimensions and material composition to decide which capture system to deploy — net or robotic arm.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">⊛</div>
+      <h4>Trajectory Prediction</h4>
+      <p>The system calculates debris velocity and trajectory, timing the deployment of the capture system for maximum interception accuracy.</p>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">⟳</div>
+      <h4>Autonomous Control</h4>
+      <p>No ground command needed for capture execution. The satellite operates fully autonomously through the detection-to-deorbit pipeline.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo">◈ ASTRA</div>
+  <p>Space Debris Catcher — Orbital Cleanup Mission</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="technology.html">Technology</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="team.html">Team</a>
+  </div>
+  <div class="footer-copy">© 2026 ASTRA Team. All Rights Reserved.</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

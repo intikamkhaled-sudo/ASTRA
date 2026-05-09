@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team — ASTRA Mission</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    .team-hero-wrap {
+      position: relative;
+      min-height: 52vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 130px 5% 80px;
+      overflow: hidden;
+      background: radial-gradient(ellipse at 50% 30%, #071e3d 0%, #040a14 70%);
+    }
+    .team-hero-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .team-hero-content { position: relative; z-index: 2; }
+    .team-hero-content h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: var(--heading);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      margin: 16px 0;
+    }
+    .team-hero-content h1 em { font-style: normal; color: var(--accent); text-shadow: 0 0 40px rgba(0,200,255,0.5); }
+    .team-hero-content p { color: var(--text-dim); font-size: 1rem; max-width: 480px; margin: 0 auto; }
+
+    .count-bar {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .count-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-head);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+    }
+    .count-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    .team-main { padding: 90px 5% 80px; background: var(--bg); }
+    .team-main .section-header { margin-bottom: 64px; }
+
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      max-width: 1100px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .member-card {
+      background: var(--card);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.35s;
+    }
+    .member-card:nth-child(3n) { border-right: none; }
+    .member-card:nth-child(4),
+    .member-card:nth-child(5) { border-bottom: none; }
+    .member-card.spacer { background: transparent; border: none !important; pointer-events: none; }
+    .member-card:hover { background: #0d1e38; }
+
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    .member-card:hover::before { transform: scaleX(1); }
+
+    .mc-photo {
+      width: 100%;
+      aspect-ratio: 1/1;
+      position: relative;
+      overflow: hidden;
+      background: #07111f;
+    }
+    .mc-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(30%) brightness(0.9);
+      transition: filter 0.4s, transform 0.5s;
+    }
+    .member-card:hover .mc-photo img {
+      filter: grayscale(0%) brightness(1.05);
+      transform: scale(1.04);
+    }
+    .mc-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,200,255,0.02) 3px,rgba(0,200,255,0.02) 4px);
+      pointer-events: none;
+    }
+
+    .mc-avatar {
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      background: radial-gradient(ellipse at 50% 40%, #0c1e38 0%, #050d1a 100%);
+      transition: background 0.4s;
+    }
+    .member-card:hover .mc-avatar { background: radial-gradient(ellipse at 50% 40%, #102840 0%, #07111f 100%); }
+
+    .av-initials {
+      font-family: var(--font-head);
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--accent);
+      opacity: 0.2;
+      letter-spacing: 0.05em;
+      transition: opacity 0.4s;
+    }
+    .member-card:hover .av-initials { opacity: 0.55; }
+
+    .av-icon {
+      font-size: 3rem;
+      opacity: 0.06;
+      position: absolute;
+      bottom: 12px; right: 16px;
+      transition: opacity 0.4s;
+    }
+    .member-card:hover .av-icon { opacity: 0.14; }
+
+    .mc-photo-hint {
+      position: absolute;
+      bottom: 8px; left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-head);
+      font-size: 0.48rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      white-space: nowrap;
+      background: rgba(4,10,20,0.82);
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+    }
+    .member-card:hover .mc-photo-hint { opacity: 0.7; }
+
+    .mc-info {
+      padding: 22px 24px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .mc-number {
+      font-family: var(--font-head);
+      font-size: 0.52rem;
+      letter-spacing: 0.25em;
+      color: var(--text-dim);
+      opacity: 0.45;
+      margin-bottom: 3px;
+    }
+    .mc-name {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--heading);
+      letter-spacing: 0.04em;
+      transition: color 0.3s;
+    }
+    .member-card:hover .mc-name { color: var(--accent); }
+
+    .mc-role {
+      font-family: var(--font-head);
+      font-size: 0.57rem;
+      letter-spacing: 0.18em;
+      color: var(--accent2);
+      text-transform: uppercase;
+    }
+    .mc-divider {
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+      margin: 10px 0;
+      opacity: 0.35;
+      transition: width 0.4s, opacity 0.4s;
+    }
+    .member-card:hover .mc-divider { width: 56px; opacity: 0.9; }
+    .mc-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.65; }
+
+    /* last 2 cards centred */
+    @media (min-width: 901px) {
+      .member-card:nth-child(4) { grid-column: 1 / 2; margin-left: calc(50% + 1px); }
+      .member-card:nth-child(5) { grid-column: 2 / 3; }
+      .member-card.spacer { grid-column: 3 / 4; }
+    }
+
+    @media (max-width: 900px) {
+      .members-grid { grid-template-columns: repeat(2, 1fr); }
+      .member-card { border-right: 1px solid var(--border) !important; border-bottom: 1px solid var(--border) !important; }
+      .member-card:nth-child(2n) { border-right: none !important; }
+      .member-card:last-child, .member-card.spacer { border-bottom: none !important; }
+      .member-card:nth-child(4) { margin-left: 0; grid-column: auto; }
+      .member-card.spacer { display: none; }
+    }
+    @media (max-width: 560px) {
+      .members-grid { grid-template-columns: 1fr; }
+      .member-card { border-right: none !important; }
+    }
+
+    .mission-quote {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 72px 5%;
+      text-align: center;
+    }
+    .mission-quote blockquote {
+      font-family: var(--font-head);
+      font-size: clamp(1rem, 2.5vw, 1.45rem);
+      font-weight: 400;
+      color: var(--heading);
+      max-width: 750px;
+      margin: 0 auto 20px;
+      line-height: 1.65;
+      letter-spacing: 0.03em;
+      opacity: 0.85;
+    }
+    .mission-quote blockquote em { font-style: normal; color: var(--accent); }
+    .mission-quote cite {
+      font-family: var(--font-head);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      color: var(--text-dim);
+    }
+
+    .photo-note {
+      max-width: 780px;
+      margin: 48px auto 0;
+      background: rgba(0,200,255,0.04);
+      border: 1px dashed rgba(0,200,255,0.18);
+      border-radius: 4px;
+      padding: 18px 24px;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+    }
+    .photo-note code {
+      background: rgba(0,200,255,0.1);
+      color: var(--accent2);
+      padding: 2px 6px;
+      border-radius: 2px;
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo"><span class="logo-icon">◈</span><span>ASTRA</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="simulation.html">Simulation</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="team.html" class="active">Team</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="team-hero-wrap">
+  <canvas id="starfield"></canvas>
+  <div class="team-hero-content">
+    <span class="section-tag">THE PEOPLE BEHIND SDC</span>
+    <h1>MEET THE<br/><em>CREW</em></h1>
+    <p>Five engineers on a mission to clear Earth's orbital lanes — one debris at a time.</p>
+  </div>
+</div>
+
+<!-- COUNT BAR -->
+<div class="count-bar">
+  <div class="count-item">
+    <div class="count-dot"></div>
+    5 TEAM MEMBERS
+  </div>
+  <div class="count-item">
+    <div class="count-dot" style="background:var(--accent2);box-shadow:0 0 8px var(--accent2)"></div>
+    ACTIVE MISSION
+  </div>
+  <div class="count-item">
+    <div class="count-dot" style="background:var(--accent3);box-shadow:0 0 8px var(--accent3)"></div>
+    SPACE DEBRIS CATCHER
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="team-main">
+  <div class="section-header">
+    <span class="section-tag">CREW ROSTER</span>
+    <h2>The <em>Minds</em> Behind the Mission</h2>
+  </div>
+
+  <div class="members-grid">
+
+    <!-- 01 KHALED ISMAIL -->
+    <div class="member-card">
+      <div class="mc-photo">
+        <div class="mc-avatar">
+          <div class="av-initials">KI</div>
+          <div class="av-icon">◈</div>
+        </div>
+        <!-- عشان تضيف صورة: احذف السطرين فوق وشيل التعليق من السطر الجاي -->
+        <!-- <img src="images/team/khaled.jpg" alt="Khaled Ismail"/> -->
+        <div class="mc-photo-hint">ADD PHOTO → images/team/khaled.jpg</div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-number">MEMBER · 01</div>
+        <div class="mc-name">Khaled Ismail</div>
+        <div class="mc-role">Simulation And Visualization</div>
+        <div class="mc-divider"></div>
+        <div class="mc-desc"></div>
+      </div>
+    </div>
+
+    <!-- 02 HESHAM SYED -->
+    <div class="member-card">
+      <div class="mc-photo">
+        <div class="mc-avatar">
+          <div class="av-initials">HS</div>
+          <div class="av-icon">⟁</div>
+        </div>
+        <!-- <img src="images/team/hesham.jpg" alt="Hesham Syed"/> -->
+        <div class="mc-photo-hint">ADD PHOTO → images/team/hesham.jpg</div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-number">MEMBER · 02</div>
+        <div class="mc-name">Hesham Syed</div>
+        <div class="mc-role">Mechanical Engineer</div>
+        <div class="mc-divider"></div>
+        <div class="mc-desc"></div>
+      </div>
+    </div>
+
+    <!-- 03 NADA AMER -->
+    <div class="member-card">
+      <div class="mc-photo">
+        <div class="mc-avatar">
+          <div class="av-initials">NA</div>
+          <div class="av-icon">◉</div>
+        </div>
+        <!-- <img src="images/team/nada.jpg" alt="Nada Amer"/> -->
+        <div class="mc-photo-hint">ADD PHOTO → images/team/nada.jpg</div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-number">MEMBER · 03</div>
+        <div class="mc-name">Nada Amer</div>
+        <div class="mc-role">Team Leader And AI</div>
+        <div class="mc-divider"></div>
+        <div class="mc-desc"></div>
+      </div>
+    </div>
+
+    <!-- 04 MARWA ABDELRADY -->
+    <div class="member-card">
+      <div class="mc-photo">
+        <div class="mc-avatar">
+          <div class="av-initials">MA</div>
+          <div class="av-icon">⬡</div>
+        </div>
+        <!-- <img src="images/team/marwa.jpg" alt="Marwa Abdelrady"/> -->
+        <div class="mc-photo-hint">ADD PHOTO → images/team/marwa.jpg</div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-number">MEMBER · 04</div>
+        <div class="mc-name">Marwa Abdelrady</div>
+        <div class="mc-role">Scientific Searching</div>
+        <div class="mc-divider"></div>
+        <div class="mc-desc"></div>
+      </div>
+    </div>
+
+    <!-- 05 YASMINE MAHMOUD -->
+    <div class="member-card">
+      <div class="mc-photo">
+        <div class="mc-avatar">
+          <div class="av-initials">YM</div>
+          <div class="av-icon">⊛</div>
+        </div>
+        <!-- <img src="images/team/yasmine.jpg" alt="Yasmine Mahmoud"/> -->
+        <div class="mc-photo-hint">ADD PHOTO → images/team/yasmine.jpg</div>
+      </div>
+      <div class="mc-info">
+        <div class="mc-number">MEMBER · 05</div>
+        <div class="mc-name">Yasmine Mahmoud</div>
+        <div class="mc-role">Data nalysis</div>
+        <div class="mc-divider"></div>
+        <div class="mc-desc"></div>
+      </div>
+    </div>
+
+    <!-- Spacer to fill 6th cell -->
+    <div class="member-card spacer"></div>
+
+  </div>
+
+  <div class="photo-note">
+  
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="mission-quote">
+  <blockquote>
+    "We don't wait for space to clean itself.<br/>
+    We build the tools to <em>do it ourselves.</em>"
+  </blockquote>
+  <cite>— ASTRA TEAM · SPACE DEBRIS CATCHER</cite>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">◈ ASTRA</div>
+  <p>Space Debris Catcher — Orbital Cleanup Mission</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="technology.html">Technology</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="team.html">Team</a>
+  </div>
+  <div class="footer-copy">© 2026 ASTRA Team. All Rights Reserved.</div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+  // Staggered card entrance animation
+  document.querySelectorAll('.member-card:not(.spacer)').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(32px)';
+    card.style.transition = `opacity 0.65s ease ${i * 0.12}s, transform 0.65s ease ${i * 0.12}s, background 0.35s`;
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.member-card:not(.spacer)').forEach(c => obs.observe(c));
+</script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery — ASTRA Mission</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-logo"><span class="logo-icon">◈</span><span>ASTRA</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="technology.html">Technology</a></li>
+    <li><a href="simulation.html">Simulation</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="team.html">Team</a></li>
+  </ul>
+  <div class="nav-hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<section class="page-hero">
+  <canvas id="starfield"></canvas>
+  <div class="page-hero-content">
+    <span class="section-tag">PROJECT GALLERY</span>
+    <h1>Mission <em>Gallery</em></h1>
+    <p>Images and renders from our simulation, design process, and system testing.</p>
+  </div>
+</section>
+
+<!-- FILTER TABS -->
+<section class="gallery-section">
+  <div class="gallery-filters">
+    <button class="filter-btn active" onclick="filterGallery('all', this)">All</button>
+    <button class="filter-btn" onclick="filterGallery('net', this)">Net System</button>
+    <button class="filter-btn" onclick="filterGallery('arm', this)">Robotic Arm</button>
+    <button class="filter-btn" onclick="filterGallery('satellite', this)">Satellite</button>
+    <button class="filter-btn" onclick="filterGallery('sim', this)">Simulation</button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid">
+
+    <!-- NET SYSTEM IMAGES -->
+    <!-- REPLACE src WITH YOUR IMAGE PATHS -->
+    <div class="gallery-item" data-cat="net" onclick="openLightbox('images/net-01.jpg','Net Deployment Sequence')">
+      <img src="images/net-01.jpg" alt="Net Deployment" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⬡</span><p>net-01.jpg</p></div>
+      <div class="gallery-overlay"><span>Net Deployment</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="net" onclick="openLightbox('images/net-02.jpg','Net Capture Close-up')">
+      <img src="images/net-02.jpg" alt="Net Capture" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⬡</span><p>net-02.jpg</p></div>
+      <div class="gallery-overlay"><span>Net Capture Close-up</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="net" onclick="openLightbox('images/net-03.jpg','Debris Wrapping')">
+      <img src="images/net-03.jpg" alt="Debris Wrapping" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⬡</span><p>net-03.jpg</p></div>
+      <div class="gallery-overlay"><span>Debris Wrapping</span></div>
+    </div>
+
+    <!-- ARM SYSTEM IMAGES -->
+    <div class="gallery-item" data-cat="arm" onclick="openLightbox('images/arm-01.jpg','Robotic Arm Extension')">
+      <img src="images/arm-01.jpg" alt="Robotic Arm" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⟁</span><p>arm-01.jpg</p></div>
+      <div class="gallery-overlay"><span>Robotic Arm Extension</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="arm" onclick="openLightbox('images/arm-02.jpg','Electromagnetic Grip')">
+      <img src="images/arm-02.jpg" alt="Electromagnet" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⟁</span><p>arm-02.jpg</p></div>
+      <div class="gallery-overlay"><span>Electromagnetic Grip</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="arm" onclick="openLightbox('images/arm-03.jpg','Large Debris Capture')">
+      <img src="images/arm-03.jpg" alt="Large Debris" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⟁</span><p>arm-03.jpg</p></div>
+      <div class="gallery-overlay"><span>Large Debris Capture</span></div>
+    </div>
+
+    <!-- SATELLITE IMAGES -->
+    <div class="gallery-item" data-cat="satellite" onclick="openLightbox('images/sat-01.jpg','Satellite Overview')">
+      <img src="images/sat-01.jpg" alt="Satellite" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>◈</span><p>sat-01.jpg</p></div>
+      <div class="gallery-overlay"><span>Satellite Overview</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="satellite" onclick="openLightbox('images/sat-02.jpg','AI Camera System')">
+      <img src="images/sat-02.jpg" alt="AI Camera" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>◉</span><p>sat-02.jpg</p></div>
+      <div class="gallery-overlay"><span>AI Camera System</span></div>
+    </div>
+
+    <!-- SIMULATION IMAGES -->
+    <div class="gallery-item sim-wide" data-cat="sim" onclick="openLightbox('images/sim-01.jpg','Full Mission Simulation')">
+      <img src="images/sim-01.jpg" alt="Simulation" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⊛</span><p>sim-01.jpg</p></div>
+      <div class="gallery-overlay"><span>Full Mission Simulation</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="sim" onclick="openLightbox('images/sim-02.jpg','Deorbit Phase')">
+      <img src="images/sim-02.jpg" alt="Deorbit" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⟳</span><p>sim-02.jpg</p></div>
+      <div class="gallery-overlay"><span>Deorbit Phase</span></div>
+    </div>
+
+    <div class="gallery-item" data-cat="sim" onclick="openLightbox('images/sim-03.jpg','Atmospheric Burnup')">
+      <img src="images/sim-03.jpg" alt="Burnup" onerror="this.parentElement.classList.add('img-placeholder'); this.style.display='none'"/>
+      <div class="placeholder-fallback"><span>⊞</span><p>sim-03.jpg</p></div>
+      <div class="gallery-overlay"><span>Atmospheric Burnup</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lb-close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="" alt=""/>
+    <div id="lb-caption"></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo">◈ ASTRA</div>
+  <p>Space Debris Catcher — Orbital Cleanup Mission</p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="technology.html">Technology</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="team.html">Team</a>
+  </div>
+  <div class="footer-copy">© 2026 ASTRA Team. All Rights Reserved.</div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
