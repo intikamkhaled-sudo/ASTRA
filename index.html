@@ -3,17 +3,308 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Space Debris Catcher — ASTRA ٍِMission</title>
+  <title>Space Debris Catcher — SDC Mission</title>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Exo+2:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
+<!-- ═══════════════════════════════════════════
+     QURAN VERSE — OPENING SCREEN
+════════════════════════════════════════════ -->
+<div class="quran-screen" id="quranScreen">
+  <canvas class="quran-stars" id="quranStars"></canvas>
+
+  <!-- decorative top line -->
+  <div class="quran-topline"></div>
+
+  <!-- ornament top -->
+  <div class="quran-ornament top">
+    <svg viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="20" x2="140" y2="20" stroke="rgba(200,170,80,0.4)" stroke-width="0.8"/>
+      <polygon points="160,20 150,14 155,20 150,26" fill="rgba(200,170,80,0.5)"/>
+      <circle cx="180" cy="20" r="3" fill="none" stroke="rgba(200,170,80,0.6)" stroke-width="0.8"/>
+      <circle cx="200" cy="20" r="6" fill="none" stroke="rgba(200,170,80,0.7)" stroke-width="0.8"/>
+      <circle cx="200" cy="20" r="2" fill="rgba(200,170,80,0.8)"/>
+      <circle cx="220" cy="20" r="3" fill="none" stroke="rgba(200,170,80,0.6)" stroke-width="0.8"/>
+      <polygon points="240,20 250,14 245,20 250,26" fill="rgba(200,170,80,0.5)"/>
+      <line x1="260" y1="20" x2="400" y2="20" stroke="rgba(200,170,80,0.4)" stroke-width="0.8"/>
+    </svg>
+  </div>
+
+  <div class="quran-content">
+    <!-- Surah label -->
+    <div class="quran-surah-label">سورة الفرقان — آية ٦١</div>
+
+    <!-- The Verse -->
+    <div class="quran-verse-wrap">
+      <div class="quran-bismillah">﷽</div>
+      <p class="quran-verse" lang="ar" dir="rtl">
+        تَبَارَكَ الَّذِي جَعَلَ فِي السَّمَاءِ بُرُوجًا
+        <br/>
+        وَجَعَلَ فِيهَا سِرَاجًا وَقَمَرًا مُّنِيرًا
+      </p>
+    </div>
+
+    <!-- Translation -->
+    <div class="quran-translation">
+      "Blessed is He Who placed the constellations in the sky,<br/>
+      and placed therein a lamp and an illuminating moon."
+    </div>
+
+    <!-- ornament bottom -->
+    <div class="quran-ornament bottom">
+      <svg viewBox="0 0 400 40" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="20" x2="140" y2="20" stroke="rgba(200,170,80,0.4)" stroke-width="0.8"/>
+        <polygon points="160,20 150,14 155,20 150,26" fill="rgba(200,170,80,0.5)"/>
+        <circle cx="180" cy="20" r="3" fill="none" stroke="rgba(200,170,80,0.6)" stroke-width="0.8"/>
+        <circle cx="200" cy="20" r="6" fill="none" stroke="rgba(200,170,80,0.7)" stroke-width="0.8"/>
+        <circle cx="200" cy="20" r="2" fill="rgba(200,170,80,0.8)"/>
+        <circle cx="220" cy="20" r="3" fill="none" stroke="rgba(200,170,80,0.6)" stroke-width="0.8"/>
+        <polygon points="240,20 250,14 245,20 250,26" fill="rgba(200,170,80,0.5)"/>
+        <line x1="260" y1="20" x2="400" y2="20" stroke="rgba(200,170,80,0.4)" stroke-width="0.8"/>
+      </svg>
+    </div>
+
+    <!-- Enter button -->
+    <button class="quran-enter" onclick="enterSite()">
+      <span class="enter-text">ENTER MISSION</span>
+      <span class="enter-arrow">↓</span>
+    </button>
+  </div>
+
+  <!-- decorative bottom line -->
+  <div class="quran-topline bottom-line"></div>
+</div>
+
+<style>
+/* ══════════════════════════════════════
+   QURAN SCREEN
+══════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&display=swap');
+
+.quran-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: radial-gradient(ellipse at 50% 40%, #080d1a 0%, #020509 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.quran-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* starfield */
+.quran-stars {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+/* top / bottom golden lines */
+.quran-topline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(200,170,80,0.6), transparent);
+}
+.bottom-line { top: auto; bottom: 0; }
+
+/* ornaments */
+.quran-ornament {
+  width: min(420px, 90vw);
+  opacity: 0;
+  animation: fadeUp 1s 0.6s ease forwards;
+}
+.quran-ornament.bottom {
+  animation-delay: 0.9s;
+}
+.quran-ornament svg { width: 100%; height: auto; }
+
+/* content wrapper */
+.quran-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 0 24px;
+  text-align: center;
+  max-width: 820px;
+}
+
+/* surah label */
+.quran-surah-label {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: 1rem;
+  color: rgba(200,170,80,0.6);
+  letter-spacing: 0.1em;
+  opacity: 0;
+  animation: fadeUp 1s 0.3s ease forwards;
+}
+
+/* verse container */
+.quran-verse-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeUp 1.2s 0.5s ease forwards;
+}
+
+/* bismillah */
+.quran-bismillah {
+  font-family: 'Scheherazade New', 'Traditional Arabic', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: rgba(200,170,80,0.5);
+  line-height: 1;
+}
+
+/* THE VERSE */
+.quran-verse {
+  font-family: 'Scheherazade New', 'Traditional Arabic', 'Amiri', serif;
+  font-size: clamp(1.9rem, 5.5vw, 3.8rem);
+  font-weight: 700;
+  color: #e8d080;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 40px rgba(200,170,80,0.35),
+    0 0 80px rgba(200,170,80,0.12);
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+/* translation */
+.quran-translation {
+  font-family: 'Exo 2', sans-serif;
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(180,210,240,0.55);
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 1s 1s ease forwards;
+  max-width: 560px;
+}
+
+/* enter button */
+.quran-enter {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid rgba(200,170,80,0.3);
+  border-radius: 2px;
+  padding: 14px 40px;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s ease forwards;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.quran-enter::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,170,80,0.06), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.quran-enter:hover {
+  border-color: rgba(200,170,80,0.7);
+  background: rgba(200,170,80,0.06);
+}
+
+.quran-enter:hover::before { opacity: 1; }
+
+.enter-text {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: rgba(200,170,80,0.8);
+  text-transform: uppercase;
+}
+
+.enter-arrow {
+  font-size: 1rem;
+  color: rgba(200,170,80,0.5);
+  animation: arrowBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<script>
+/* ── Quran screen starfield ── */
+(function(){
+  const c = document.getElementById('quranStars');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  let W, H, stars=[];
+  function resize(){ W=c.width=c.offsetWidth; H=c.height=c.offsetHeight; }
+  function init(){
+    resize();
+    stars=[];
+    for(let i=0;i<260;i++) stars.push({
+      x:Math.random()*W, y:Math.random()*H,
+      r:Math.random()*1.3+0.2,
+      a:Math.random(), s:Math.random()*0.3+0.05,
+      t:Math.random()*0.015+0.003, d:Math.random()>0.5?1:-1
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a+=s.t*s.d; if(s.a<=0.05||s.a>=1) s.d*=-1;
+      s.y+=s.s; if(s.y>H){s.y=0;s.x=Math.random()*W;}
+      ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(220,200,140,${s.a*0.7})`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* ── Enter site ── */
+function enterSite(){
+  document.getElementById('quranScreen').classList.add('fade-out');
+  setTimeout(()=>{
+    document.getElementById('quranScreen').style.display='none';
+  }, 1000);
+}
+</script>
+
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="nav-logo">
     <span class="logo-icon">◈</span>
-    <span>ASTRA</span>
+    <span>SDC</span>
   </div>
   <ul class="nav-links">
     <li><a href="index.html" class="active">Home</a></li>
@@ -431,7 +722,7 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-logo">◈ ASTRA</div>
+  <div class="footer-logo">◈ SDC</div>
   <p>Space Debris Catcher — Orbital Cleanup Mission</p>
   <div class="footer-links">
     <a href="index.html">Home</a>
@@ -440,7 +731,7 @@
     <a href="gallery.html">Gallery</a>
     <a href="team.html">Team</a>
   </div>
-  <div class="footer-copy">© 2026 ASTRA Team. All Rights Reserved.</div>
+  <div class="footer-copy">© 2025 SDC Team. All Rights Reserved.</div>
 </footer>
 
 <script src="main.js"></script>
